@@ -7,14 +7,13 @@
 *
 ***************************************************************************************/
 
-//just some code slapped together over saturday morning coffee for the birb's nest sparkles challenge #WCChallenge
-//press a key to reveal the path
+//variables
 let four;
-let stream = []; //array of dreams
-let t; //a sprinkle of time
-let n = 4000; //number of beings
-let r1, g1, b1; //what our cones may see.
-let path = false; //hidden
+let stream = []; 
+let t; 
+let n = 4000; 
+let r1, g1, b1; 
+let path = false; 
 let timer = 5;
 let button;
 
@@ -24,29 +23,30 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight); //a pillow for the mind
+  createCanvas(windowWidth, windowHeight); 
   for (let i = 0; i < n; i++) {
-    stream.push(new dreams()); //where dreams are born
+    stream.push(new dreams()); 
   }
-  r1 = random(180, 255); //reds
-  g1 = random(180, 255); //greens
-  b1 = random(180, 255); //blues
+  r1 = random(180, 255); 
+  g1 = random(180, 255); 
+  b1 = random(180, 255);
   noStroke();
   four.play();
   four.loop();
 }
 function draw() {
-  background(r1 / 10, g1 / 10, b1 / 10, 50); //but darker is the room
-  translate(width / 2, height / 2); //center our origin
-  t = frameCount / 10000; //fractions of moments
+  background(r1 / 10, g1 / 10, b1 / 10, 50); 
+  translate(width / 2, height / 2); 
+  t = frameCount / 10000;
   for (let i = 0; i < n; i++) {
-    stream[i].display(); //thoughts looped in loops
+    stream[i].display(); 
   }
   if (path) {
-    test(); //a hidden curve in which dreams follow
+    test(); 
   }
+  //timer
   if (frameCount % 60 == 0 && timer > 0) {
-    // if the frameCount is divisible by 60, then a second has passed. it will stop at 0
+  
     timer--;
   }
   //  console.log(timer);
@@ -61,13 +61,13 @@ function draw() {
     button.position(425, height/2);
     button.mousePressed(function goToAnotherPage() {
       window.location.href =
-        "https://editor.p5js.org/natashatan/sketches/gxSMDJpDT";
+        "https://tashatan1.github.io/let-s-breath/";
     });
   }
 }
 
 function sparkle(a, b) {
-  //ya basic sparkle
+ //animation for visual
   beginShape();
   for (let i = 0; i <= PI / 2; i += 0.1) {
     x = a * cos(i) - a;
@@ -93,55 +93,55 @@ function sparkle(a, b) {
 }
 
 class dreams {
-  //an object to behold
+ 
   constructor() {
-    this.offset = random(10, 10.5); //a smidge offtrack
-    this.a = random(0.1, random(1, 10)); //abcd...shapes of sparkles from ellipses ...
+    this.offset = random(10, 10.5); 
+    this.a = random(0.1, random(1, 10)); 
     this.b = random(0.1, random(1, 10));
     this.c = random(0.1, random(1, 10));
     this.d = random(0.1, random(1, 10));
-    this.type = floor(random(0, 7.999)); //a deceiving number
-    this.s = random(0, width); //something to stir with
+    this.type = floor(random(0, 7.999)); 
+    this.s = random(0, width);
   }
   display() {
-    let p = 100 * sin(t * 2000 + this.a); //there and not there - a blink
+    let p = 100 * sin(t * 2000 + this.a);
     fill(r1, g1, b1, p);
     push();
 
     if (this.type == 0) {
-      this.t = width * sin(t / 100 + this.s); //a step forward - or back
+      this.t = width * sin(t / 100 + this.s); 
       let x = this.offset * this.t * sin(this.t) * cos(this.t / 4);
       let y = this.offset * this.t * cos(this.t) * sin(this.t / 4);
-      translate(x, y); //where we are
-      sparkle(this.a, this.b); //exist
-      push(); //every push needs an equal and opposite pop
+      translate(x, y); 
+      sparkle(this.a, this.b); 
+      push(); 
       rotate(PI / 8);
       sparkle(this.c, this.d);
       pop();
     } else if (this.type == 1) {
-      this.t = width * sin(t / 100 + this.s); //a step forward - or back
+      this.t = width * sin(t / 100 + this.s);
       let x = this.offset * this.t * sin(this.t) * cos(this.t / 4);
       let y = this.offset * this.t * cos(this.t) * sin(this.t / 4);
-      translate(x, y); //where we are
-      sparkle(this.a, this.b); //exist
+      translate(x, y); 
+      sparkle(this.a, this.b); 
     } else if (this.type == 2) {
-      this.t = width * sin(t / 100 + (this.s * this.a) / 100); //a step forward - or back
+      this.t = width * sin(t / 100 + (this.s * this.a) / 100);
       let x = this.offset * this.t * sin(this.t) * cos(this.t / 4);
       let y = this.offset * this.t * cos(this.t) * sin(this.t / 4);
-      translate(x, y); //where we are
+      translate(x, y); 
       fill(r1, g1, b1, 2 * cos(this.t / this.offset));
-      ellipse(0, 0, this.s, this.s); //exist
+      ellipse(0, 0, this.s, this.s); 
     } else if (this.type >= 3) {
-      this.t = width * sin(t / 100 + this.s); //a step forward - or back
+      this.t = width * sin(t / 100 + this.s); 
       let x = this.offset * this.t * sin(this.t) * cos(this.t / 4);
       let y = this.offset * this.t * cos(this.t) * sin(this.t / 4);
-      translate(x, y); //where we are
-      sparkle(this.a, this.b); //exist
+      translate(x, y);
+      sparkle(this.a, this.b); 
       push();
       rotate(PI / 12);
-      sparkle(this.c, this.d); //exist
+      sparkle(this.c, this.d); 
       rotate(PI / 6);
-      sparkle(this.c, this.d); //exist
+      sparkle(this.c, this.d);
       pop();
     }
 
@@ -149,7 +149,7 @@ class dreams {
   }
 }
 
-//the curve in which dreams follow
+
 function test() {
   noFill();
   stroke(r1, g1, b1, 10);
@@ -165,10 +165,10 @@ function test() {
   noStroke();
 }
 
-//I often play with curves prior to coding - here is that playground: https://www.desmos.com/calculator/uwtvritmhy
+
 
 function mousePressed() {
-  //awake then sleep
+ 
   stream = [];
   t = 0;
   setup();
